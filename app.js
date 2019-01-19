@@ -145,10 +145,6 @@ var financeController = (function() {
     
 })();
 
-
-
-
-// UI CONTROLLER
 var UIController = (function() {
     
     var DOMstrings = {
@@ -358,53 +354,6 @@ var controller = (function(budgetCtrl, UICtrl) {
     };
     
     
-    var updatePercentages = function() {
-        
-
-        budgetCtrl.calculatePercentages();
-        
-     
-        var percentages = budgetCtrl.getPercentages();
-        
-
-        UICtrl.displayPercentages(percentages);
-    };
-    
-    
-    var ctrlAddItem = function() {
-        var input, newItem;
-        
-     
-        input = UICtrl.getInput();        
-        
-        if (input.description !== "" && !isNaN(input.value) && input.value > 0) {
-            newItem = budgetCtrl.addItem(input.type, input.description, input.value);
-            UICtrl.addListItem(newItem, input.type);
-            UICtrl.clearFields();
-            updateBudget();
-            updatePercentages();
-        }
-    };
-    
-    
-    var ctrlDeleteItem = function(event) {
-        var itemID, splitID, type, ID;
-        itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
-        if (itemID) {
-            //inc-1
-            splitID = itemID.split('-');
-            type = splitID[0];
-            ID = parseInt(splitID[1]);
-            
-            budgetCtrl.deleteItem(type, ID);
-            
-            UICtrl.deleteListItem(itemID);
-            
-            updateBudget();
-            
-            updatePercentages();
-        }
-    };
     
     
     return {
